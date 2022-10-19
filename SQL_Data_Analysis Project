@@ -9,3 +9,13 @@ away_team_goal_count
 FROM eurosoccer_database.epl_matches_2018
 WHERE home_team_goal_count > away_team_goal_count
 ORDER BY home_team_name
+
+--Which teams had the most fans in attendance?
+--Find the top 10 games with the most fans in attendance
+SELECT 
+home_team_name, 
+away_team_name,
+attendance
+FROM eurosoccer_database.epl_matches_2018
+ORDER BY attendance desc
+LIMIT 10
