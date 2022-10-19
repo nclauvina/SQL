@@ -1,2 +1,11 @@
 --Which top 3 teams had the most home game wins?
 -- Find the top 3 teams with the most home game wins.
+
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE home_team_goal_count > away_team_goal_count
+ORDER BY home_team_name
