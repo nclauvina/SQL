@@ -1,0 +1,89 @@
+--Which top 3 teams had the most home game wins?
+-- Find the top 3 teams with the most home game wins.
+
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE home_team_goal_count > away_team_goal_count
+ORDER BY home_team_name
+
+--Which teams had the most fans in attendance?
+--Find the top 10 games with the most fans in attendance
+SELECT 
+home_team_name, 
+away_team_name,
+attendance
+FROM eurosoccer_database.epl_matches_2018
+ORDER BY attendance desc
+LIMIT 10
+
+--Do the number of corner kicks correlate with gane outcomes?
+--Step 1. Return the columns required for analysis
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count,
+home_team_corner_count,
+away_team_corner_count
+FROM eurosoccer_database.epl_matches_2018;
+--Returns a total of 380 rows
+
+--Step 2. Return the number of games where either team has more corner kicks. 
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count,
+home_team_corner_count,
+away_team_corner_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE home_team_corner_count > away_team_corner_count
+--Returns 207 rows
+
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count,
+home_team_corner_count,
+away_team_corner_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE away_team_corner_count > home_team_corner_count
+--Returns 137 rows
+
+--Step 3. Determine if the number of corner kicks correlates with game outcome for home team or away team.
+
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count,
+home_team_corner_count,
+away_team_corner_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE 
+home_team_corner_count > away_team_corner_count and
+home_team_goal_count > away_team_goal_count
+--Returns 109 rows
+
+SELECT 
+home_team_name,
+away_team_name,
+home_team_goal_count,
+away_team_goal_count,
+home_team_corner_count,
+away_team_corner_count
+FROM eurosoccer_database.epl_matches_2018
+WHERE 
+away_team_corner_count > home_team_corner_count and
+away_team_goal_count > home_team_goal_count
+--Returns  55 rows
+
+Conclusions:
+--In the 207 total winning home team games, only 109 (52.7%) of those games, did the home team have more corner kicks than the away team.
+--In the 137 total winning away team games, only 55 (40.1%) of those games, did the away team have more corner kicks than the home team.
+--Number of corner kicks has no correlation and impact on game outcome.
