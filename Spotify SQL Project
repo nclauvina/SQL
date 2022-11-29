@@ -1,0 +1,71 @@
+//For this project, I downloaded Spotify data from Kaggle @ 
+https://www.kaggle.com/datasets/equinxx/spotify-top-50-songs-in-2021?select=spotify_top50_2021.csv.
+//I created the table to allow me to insert my data. 
+//I used SQL to analyze the data. 
+
+// 1. Create the table.
+CREATE TABLE BIT_DB.spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key1 integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode1 integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+//2. Insert the data using the Kaggle CSV file. 
+
+//What is the average popularity and danceability of all the tracks?
+SELECT  AVG(popularity), AVG(danceability)
+FROM spotifydata;
+//Average popularity is 86.8 and average danceability is 0.68572.
+
+//What are the 10 top songs based on popularity?
+SELECT artist_name, popularity 
+FROM BIT_DB.spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+//What's the average length of time for most popular 10 songs? 
+SELECT AVG (duration_ms) 
+FROM BIT_DB.spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+//Are there any songs where liveness is more than 0.1 and valence is less than 0.1?
+SELECT track_name, liveness, valence
+FROM BIT_DB.spotifydata
+WHERE liveness > 0.1 AND valence < 0.1; 
+
+//Which songs in this last have the word "you" in them?
+SELECT artist_name, track_name
+FROM BIT_DB.spotifydata
+WHERE track_name like "%you%";
+
+//Which songs in this last have the word "you" in them and have a popularity of at least 90?
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.spotifydata
+WHERE track_name like "%you%"
+AND popularity >= 90;
+
+Create a CASE statement that labels songs with energy greater than 0.75 as "high energy", songs with energy between 0.55 to 0.75 as "medium energy", 
+and songs with less than 0.55 as "small energy".
+SELECT artist_name, track_name, energy,
+CASE 
+WHEN energy > 0.75 THEN 'high energy'
+WHEN energy > 0.65 THEN 'medium energy'
+WHEN energy < 0.65 THEN 'small energy'
+END AS 'energy_ranges'
+FROM BIT_DB.spotifydata;
