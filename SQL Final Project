@@ -1,0 +1,42 @@
+1. What are the total number of albums?
+SELECT COUNT (Title)
+FROM chinook.albums;
+
+2. Show all the customers that are from Illinois and Texas. 
+SELECT * 
+FROM chinook.customers
+WHERE State = "IL" OR State = "TX";
+
+3. Which emplyoyees are sales agents?
+SELECT * 
+FROM chinook.customers
+WHERE State = "IL" OR State = "TX";
+
+4. What were the total sales from the invoices table?
+SELECT SUM (Total)
+FROM chinook.invoices
+WHERE InvoiceDate like '2010%' were the total sales in 2010 on the invoices table?
+
+5. Create a query that shows TrackID, InvoiceLineID, Unit Price, Quantity.
+SELECT p.TrackID, i.InvoiceLineID, i.InvoiceID, i.UnitPrice
+FROM chinook.playlist_track p
+LEFT JOIN chinook.invoice_items i
+ON p.TrackId = i.TrackID;
+
+6. What is the longest song on the tracks table?
+SELECT Name, Milliseconds
+FROM chinook.tracks
+ORDER BY Milliseconds desc
+LIMIT 1;
+
+7. Create a SQL query that includes the genre, genreID, and the name.
+SELECT t.Name, t.GenreID, g.name
+FROM chinook.tracks t
+LEFT JOIN chinook.genres g
+ON t.GenreID = g.GenreID;
+
+8. Create a SQL that calculates the total money spent by each country in the invoices tables.
+SELECT t.Name, t.GenreID, g.name
+FROM chinook.tracks t
+LEFT JOIN chinook.genres g
+ON t.GenreID = g.GenreID;
