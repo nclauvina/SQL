@@ -35,8 +35,14 @@ FROM chinook.tracks t
 LEFT JOIN chinook.genres g
 ON t.GenreID = g.GenreID;
 
-8. Create a SQL that calculates the total money spent by each country in the invoices tables.
+8. Create a SQL query that calculates the total money spent by each country in the invoices tables.
 SELECT t.Name, t.GenreID, g.name
 FROM chinook.tracks t
 LEFT JOIN chinook.genres g
 ON t.GenreID = g.GenreID;
+
+9. Create a SQL query that Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers.
+SELECT e.FirstName, e.LastName, i.total, c.FirstName, c.Lastname, c.Country
+FROM chinook.employees e
+JOIN chinook.customers c ON e.EmployeeID = c.SupportRepId
+JOIN chinook.invoices i ON  c.CustomerId = i.CustomerId;
