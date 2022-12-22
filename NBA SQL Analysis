@@ -1,0 +1,41 @@
+//Below is a dataset downloaded from Kaggle that includes stats and information regarding the NBA organization from 1946-2020. Linke to the dataset
+is found here. https://www.kaggle.com/datasets/wyattowalsh/basketball.
+
+1. Who were the number 1 draft picks from 2011 to 2020?
+SELECT DISTINCT yearDraft, numberPickOverall, namePlayer 
+FROM basketball.Draft
+WHERE numberPickOverall = 1
+GROUP BY yearDraft
+ORDER BY yearDraft Desc
+LIMIT 10.
+
+2. Which team has has the most number 1 draft picks in the last 20 years?
+SELECT nameTeam ,numberPickOverall, yearDraft
+FROM basketball.Draft
+WHERE numberPickOverall = 1
+ORDER by yearDraft Desc
+LIMIT 20.
+//Unable to figure out how to count number of times a team had number draft pick. User able to count based off query given.
+
+3. Create a table showing the first name, last name, and whether they're active or not from the players table and inner join 
+that data with the school they attended from the player attributes table.
+SELECT p.first_name, p.last_name, p.is_active, pa.SCHOOL
+FROM basketball.Player p
+INNER JOIN basketball.Player_Attributes pa
+ON p.first_name = pa.FIRST_NAME;
+
+4. Which player had the lowest salary from the 2020-2021 season?
+SELECT namePlayer, MIN(value)
+FROM basketball.Player_Salary
+WHERE slugSeason = '2020-21';
+
+5. Which team spent the least on players from the 2020-2021 season based off of salary
+SELECT nameTeam, total(value)
+FROM basketball.Player_Salary
+WHERE slugSeason = '2020-21'
+GROUP BY nameTeam
+ORDER BY total(value) ASC;
+
+6. What was the average team salary from the 2020-21 season?
+SELECT AVG(2020-21)
+FROM basketball.Team_Salary
