@@ -39,3 +39,12 @@ ORDER BY total(value) ASC;
 6. What was the average team salary from the 2020-21 season?
 SELECT AVG(2020-21)
 FROM basketball.Team_Salary
+
+7. How many total teams were there from this year?
+SELECT COUNT(full_name)
+FROM basketball.Team;
+
+8. Find the teams that were created between 1980 and 2000.
+SELECT full_name, year_founded
+FROM basketball.Team
+WHERE year_founded BETWEEN 1980 AND 2000;
