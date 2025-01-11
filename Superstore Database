@@ -24,27 +24,28 @@ VALUES
     (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
-1. View all the data from the database.
-SELECT* 
-FROM superstore;
 
-2. What is the total of the prices by item?
-SELECT SUM(price), item_name
+#In this database, I used the information from the superstore table above to answer questions regarding the data below
+    
+--Write a SQL query that orders the items by price.
+SELECT item_name, price
 FROM superstore
-GROUP BY item_name;
+ORDER BY price DESC;
 
-3. Order the categories of items by price from most expensive to least expensive. 
-SELECT category, price
+--Write your own SQL query that will show a statistic about the item prices, like a sum, average, minimum, maximum, or count.
+--What is theaverage price of an item in the "Electronics" category?
+SELECT category, AVG (price)
 FROM superstore
-ORDER by price desc;
+WHERE category = "Electronics";
 
-4. What is the lowest rated item from the electronic category?
-SELECT item_name, category, average_rating
+--Write your own SQL query that will show a statistic about the price for items in the category of "Kitchen Supplies".
+--What's the sum of the prices of items in the "Kitchen Supplies Category?"
+SELECT category, SUM (price)
 FROM superstore
-WHERE category = 'Electronics'
-ORDER BY average_rating ASC;
+WHERE category = "Kitchen Supplies";
 
-5. How many items are there in the electronic category?
-SELECT COUNT(category)
+--Come up with your own question about the data and try to answer it using SQL.
+--List all the items from highest rating to lowest rating
+SELECT item_name, average_rating
 FROM superstore
-WHERE category = 'Electronics';
+ORDER BY average_rating DESC;
